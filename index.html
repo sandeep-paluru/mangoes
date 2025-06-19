@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mangoes Order Form</title>
+    <!-- Tailwind CSS CDN for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light background for the page */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top to prevent form from centering vertically too much */
+            min-height: 100vh;
+            padding: 2rem 0; /* Add some vertical padding */
+        }
+        /* Custom styling for focus state, if Tailwind defaults aren't enough */
+        input:focus, select:focus, button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5); /* Blue glow on focus */
+        }
+        /* Simple modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Main form container -->
+    <div class="bg-white p-8 md:p-12 rounded-lg shadow-xl w-full max-w-md mx-4 sm:max-w-lg lg:max-w-xl">
+        <!-- Header Section -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 flex items-center justify-center mb-2">
+                <span class="mr-3 text-5xl">🥭</span> ABC Mangoes Order Form
+            </h1>
+            <p class="text-gray-600 text-lg italic">A delightful selection of fresh mangoes, delivered to you!</p>
+        </div>
+
+        <!-- Personal Information Section -->
+        <div class="mb-8 p-6 bg-gray-50 rounded-lg border border-gray-200">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Personal Information</h2>
+            <p class="text-gray-500 text-sm mb-6">Please provide your contact details for delivery.</p>
+
+            <div class="mb-4">
+                <label for="customerName" class="block text-gray-700 text-sm font-medium mb-1">Name</label>
+                <input type="text" id="customerName" name="customerName" placeholder="e.g., Sandeep Kumar" required
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200 ease-in-out">
+            </div>
+            <div class="mb-4">
+                <label for="emailAddress" class="block text-gray-700 text-sm font-medium mb-1">Email Address</label>
+                <input type="email" id="emailAddress" name="emailAddress" placeholder="e.g., sandeep@example.com" required
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200 ease-in-out">
+            </div>
+            <div class="mb-4">
+                <label for="phoneNumber" class="block text-gray-700 text-sm font-medium mb-1">Phone Number</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="e.g., 555-123-4567" required
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200 ease-in-out">
+            </div>
+        </div>
+
+        <!-- Items Section -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Your Order Selection</h2>
+            <p class="text-gray-500 text-sm mb-6">Select your preferred mangoes and quantities below. Totals will update automatically.</p>
+
+            <!-- Banganepally Mangoes Card -->
+            <div class="bg-blue-50 p-6 rounded-lg border border-blue-200 mb-6 shadow-sm">
+                <h3 class="text-xl font-medium text-blue-800 mb-3 flex items-center">
+                    <span class="mr-2 text-2xl">🥭</span> Banganepally Mangoes
+                </h3>
+                <div class="mb-4">
+                    <label for="banganepallyBoxSize" class="block text-gray-700 text-sm font-medium mb-1">Box Size & Unit Price</label>
+                    <select id="banganepallyBoxSize" name="banganepallyBoxSize"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200 ease-in-out cursor-pointer item-input"
+                            data-item="banganepally">
+                        <option value="0" selected disabled>Select an option</option>
+                        <option value="2.99">1/2 box ($2.99)</option>
+                        <option value="4.00">1 box ($4.00)</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="banganepallyQty" class="block text-gray-700 text-sm font-medium mb-1">Quantity</label>
+                    <input type="number" id="banganepallyQty" name="banganepallyQty" value="0" min="0"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200 ease-in-out item-input"
+                           data-item="banganepally">
+                </div>
+                <p class="text-lg font-semibold text-gray-800">Banganepally Total: <span id="banganepallyTotalPrice">$0.00</span></p>
+            </div>
+
+            <!-- Rasalu Mangoes Card -->
+            <div class="bg-green-50 p-6 rounded-lg border border-green-200 shadow-sm">
+                <h3 class="text-xl font-medium text-green-800 mb-3 flex items-center">
+                    <span class="mr-2 text-2xl">🥭</span> Rasalu Mangoes
+                </h3>
+                <div class="mb-4">
+                    <label for="rasaluBoxSize" class="block text-gray-700 text-sm font-medium mb-1">Box Size & Unit Price</label>
+                    <select id="rasaluBoxSize" name="rasaluBoxSize"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:ring-2 focus:ring-green-400 focus:border-transparent transition duration-200 ease-in-out cursor-pointer item-input"
+                            data-item="rasalu">
+                        <option value="0" selected disabled>Select an option</option>
+                        <option value="1.99">1/2 box ($1.99)</option>
+                        <option value="3.00">1 box ($3.00)</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="rasaluQty" class="block text-gray-700 text-sm font-medium mb-1">Quantity</label>
+                    <input type="number" id="rasaluQty" name="rasaluQty" value="0" min="0"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-400 focus:border-transparent transition duration-200 ease-in-out item-input"
+                           data-item="rasalu">
+                </div>
+                <p class="text-lg font-semibold text-gray-800">Rasalu Total: <span id="rasaluTotalPrice">$0.00</span></p>
+            </div>
+        </div>
+
+        <!-- Grand Total Section -->
+        <div class="mt-8 p-6 bg-yellow-100 rounded-lg border border-yellow-300 text-center shadow-md">
+            <h2 class="text-2xl font-bold text-yellow-800 mb-3 flex items-center justify-center">
+                <span class="mr-2 text-3xl">📝</span> Your Total:
+            </h2>
+            <p class="text-4xl font-extrabold text-yellow-900 leading-tight" id="grandTotalPrice">$0.00</p>
+            <p class="text-gray-600 text-sm mt-2 italic">This will update as you select items and quantities.</p>
+        </div>
+
+        <!-- Submit Button & Loading Indicator -->
+        <div class="mt-8 text-center">
+            <button type="submit" id="submitButton"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Submit Order ➡️
+            </button>
+            <div id="loadingIndicator" class="hidden mt-4 text-blue-600 font-semibold">Submitting order...</div>
+        </div>
+    </div>
+
+    <!-- The Modal (for success/error messages) -->
+    <div id="statusModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <p id="modalMessage" class="text-lg font-medium text-gray-800"></p>
+            <button id="modalCloseBtn" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition duration-200 ease-in-out">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // *** IMPORTANT: REPLACE THIS WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL ***
+        const GOOGLE_APPS_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE'; // e.g., 'https://script.google.com/macros/s/AKfycbzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz/exec'
+
+        // Get references to all necessary elements
+        const customerName = document.getElementById('customerName');
+        const emailAddress = document.getElementById('emailAddress');
+        const phoneNumber = document.getElementById('phoneNumber');
+
+        const banganepallyBoxSize = document.getElementById('banganepallyBoxSize');
+        const banganepallyQty = document.getElementById('banganepallyQty');
+        const banganepallyTotalPriceDisplay = document.getElementById('banganepallyTotalPrice');
+
+        const rasaluBoxSize = document.getElementById('rasaluBoxSize');
+        const rasaluQty = document.getElementById('rasaluQty');
+        const rasaluTotalPriceDisplay = document.getElementById('rasaluTotalPrice');
+
+        const grandTotalPriceDisplay = document.getElementById('grandTotalPrice');
+        const submitButton = document.getElementById('submitButton');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+
+        const statusModal = document.getElementById('statusModal');
+        const modalMessage = document.getElementById('modalMessage');
+        const closeButton = document.querySelector('.close-button');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+
+        // Function to calculate and update totals
+        function calculateTotals() {
+            let banganepallyUnitPrice = parseFloat(banganepallyBoxSize.value);
+            let banganepallyQuantity = parseInt(banganepallyQty.value);
+
+            // Handle disabled/placeholder option selected or invalid input
+            if (isNaN(banganepallyUnitPrice) || banganepallyUnitPrice === 0 || banganepallyUnitPrice < 0) {
+                banganepallyUnitPrice = 0;
+            }
+            if (isNaN(banganepallyQuantity) || banganepallyQuantity < 0) {
+                banganepallyQuantity = 0;
+            }
+
+            const banganepallyTotal = banganepallyUnitPrice * banganepallyQuantity;
+            banganepallyTotalPriceDisplay.textContent = `$${banganepallyTotal.toFixed(2)}`;
+
+            let rasaluUnitPrice = parseFloat(rasaluBoxSize.value);
+            let rasaluQuantity = parseInt(rasaluQty.value);
+
+            // Handle disabled/placeholder option selected or invalid input
+            if (isNaN(rasaluUnitPrice) || rasaluUnitPrice === 0 || rasaluUnitPrice < 0) {
+                rasaluUnitPrice = 0;
+            }
+            if (isNaN(rasaluQuantity) || rasaluQuantity < 0) {
+                rasaluQuantity = 0;
+            }
+
+            const rasaluTotal = rasaluUnitPrice * rasaluQuantity;
+            rasaluTotalPriceDisplay.textContent = `$${rasaluTotal.toFixed(2)}`;
+
+            const grandTotal = banganepallyTotal + rasaluTotal;
+            grandTotalPriceDisplay.textContent = `$${grandTotal.toFixed(2)}`;
+        }
+
+        // Function to show modal message
+        function showModal(message) {
+            modalMessage.textContent = message;
+            statusModal.style.display = 'flex'; // Use flex to center the modal
+        }
+
+        // Function to hide modal message
+        function hideModal() {
+            statusModal.style.display = 'none';
+        }
+
+        // Event listeners for modal close buttons
+        closeButton.addEventListener('click', hideModal);
+        modalCloseBtn.addEventListener('click', hideModal);
+        // Close modal if user clicks outside of it
+        window.addEventListener('click', (event) => {
+            if (event.target == statusModal) {
+                hideModal();
+            }
+        });
+
+
+        // Handle form submission
+        submitButton.addEventListener('click', async (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            // Simple validation
+            if (!customerName.value || !emailAddress.value || !phoneNumber.value) {
+                showModal("Please fill in all personal information fields.");
+                return;
+            }
+            if (parseFloat(grandTotalPriceDisplay.textContent.replace('$', '')) <= 0) {
+                showModal("Please select at least one item and quantity to order.");
+                return;
+            }
+
+
+            submitButton.disabled = true;
+            loadingIndicator.classList.remove('hidden');
+
+            const formData = {
+                timestamp: new Date().toLocaleString(),
+                customerName: customerName.value,
+                emailAddress: emailAddress.value,
+                phoneNumber: phoneNumber.value,
+                banganepallyBoxSize: banganepallyBoxSize.options[banganepallyBoxSize.selectedIndex].text, // Get selected text
+                banganepallyQty: banganepallyQty.value,
+                banganepallyTotal: banganepallyTotalPriceDisplay.textContent,
+                rasaluBoxSize: rasaluBoxSize.options[rasaluBoxSize.selectedIndex].text, // Get selected text
+                rasaluQty: rasaluQty.value,
+                rasaluTotal: rasaluTotalPriceDisplay.textContent,
+                grandTotal: grandTotalPriceDisplay.textContent
+            };
+
+            try {
+                // Using fetch to send data to Google Apps Script
+                const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Required for cross-origin submission to Apps Script
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    // Convert form data to URL-encoded string
+                    body: new URLSearchParams(formData).toString()
+                });
+
+                // Since mode is 'no-cors', we can't directly read the response.
+                // Assume success if no network error.
+                showModal("Order submitted successfully! Thank you.");
+                // Optionally clear the form after successful submission
+                customerName.value = '';
+                emailAddress.value = '';
+                phoneNumber.value = '';
+                banganepallyBoxSize.value = '0';
+                banganepallyQty.value = '0';
+                rasaluBoxSize.value = '0';
+                rasaluQty.value = '0';
+                calculateTotals(); // Recalculate to reset totals
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                showModal("There was an error submitting your order. Please try again.");
+            } finally {
+                submitButton.disabled = false;
+                loadingIndicator.classList.add('hidden');
+            }
+        });
+
+        // Add event listeners for real-time updates
+        banganepallyBoxSize.addEventListener('change', calculateTotals);
+        banganepallyQty.addEventListener('input', calculateTotals); // 'input' for real-time as user types
+
+        rasaluBoxSize.addEventListener('change', calculateTotals);
+        rasaluQty.addEventListener('input', calculateTotals); // 'input' for real-time as user types
+
+        // Initial calculation on page load
+        document.addEventListener('DOMContentLoaded', calculateTotals);
+    </script>
+</body>
+</html>
