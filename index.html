@@ -3,176 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mangoes Order Form</title>
+    <title>Fruit Order Form</title>
     <!-- Tailwind CSS CDN for modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f2f5; /* Light background for the page */
+            background-color: #f8fafc; /* Very light, almost white background for the page */
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Align to top to prevent form from centering vertically too much */
+            align-items: flex-start;
             min-height: 100vh;
-            padding: 2rem 0; /* Add some vertical padding */
+            padding: 2.5rem 0;
         }
         /* Custom styling for focus state, if Tailwind defaults aren't enough */
         input:focus, select:focus, button:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5); /* Blue glow on focus */
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); /* A more subtle blue ring (blue-500 with opacity) */
+            border-color: #3b82f6; /* Blue-500 */
         }
         /* Simple modal styles */
         .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
+            position: fixed;
+            z-index: 1000;
             left: 0;
             top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
             display: flex;
             justify-content: center;
             align-items: center;
         }
         .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 400px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 450px;
             text-align: center;
+            animation: fadeIn 0.3s ease-out;
         }
         .close-button {
-            color: #aaa;
+            color: #9ca3af;
             float: right;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
+            line-height: 1;
+            margin-top: -15px;
+            margin-right: -15px;
         }
         .close-button:hover,
         .close-button:focus {
-            color: black;
+            color: #4b5563;
             text-decoration: none;
             cursor: pointer;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body class="antialiased">
     <!-- Main form container -->
-    <div class="bg-white p-8 md:p-12 rounded-lg shadow-xl w-full max-w-md mx-4 sm:max-w-lg lg:max-w-xl">
+    <div class="bg-white p-8 md:p-12 rounded-xl shadow-2xl w-full max-w-md mx-4 sm:max-w-lg lg:max-w-xl border border-gray-100">
         <!-- Header Section -->
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-gray-800 flex items-center justify-center mb-2">
-                <span class="mr-3 text-5xl">🥭</span> ABC Mangoes Order Form
+        <div class="text-center mb-10">
+            <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-800 flex items-center justify-center mb-2 leading-tight">
+                Fruit Order Form
             </h1>
-            <p class="text-gray-600 text-lg italic">A delightful selection of fresh mangoes, delivered to you!</p>
+            <p class="text-gray-600 text-lg md:text-xl italic">Fresh, delicious, and delivered to your doorstep!</p>
         </div>
 
         <!-- Personal Information Section -->
-        <div class="mb-8 p-6 bg-gray-50 rounded-lg border border-gray-200">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Personal Information</h2>
-            <p class="text-gray-500 text-sm mb-6">Please provide your contact details for delivery.</p>
+        <div class="mb-10 p-7 bg-gray-50 rounded-lg border border-gray-200 shadow-inner">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-6">Your Contact Details</h2>
 
-            <div class="mb-4">
-                <label for="customerName" class="block text-gray-700 text-sm font-medium mb-1">Name</label>
+            <div class="mb-5">
+                <label for="customerName" class="block text-gray-700 text-sm font-medium mb-1.5">Full Name</label>
                 <input type="text" id="customerName" name="customerName" placeholder="e.g., Sandeep Kumar" required
-                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200 ease-in-out">
+                       class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out">
             </div>
-            <div class="mb-4">
-                <label for="emailAddress" class="block text-gray-700 text-sm font-medium mb-1">Email Address</label>
+            <div class="mb-5">
+                <label for="emailAddress" class="block text-gray-700 text-sm font-medium mb-1.5">Email Address</label>
                 <input type="email" id="emailAddress" name="emailAddress" placeholder="e.g., sandeep@example.com" required
-                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200 ease-in-out">
+                       class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out">
             </div>
-            <div class="mb-4">
-                <label for="phoneNumber" class="block text-gray-700 text-sm font-medium mb-1">Phone Number</label>
-                <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="e.g., 555-123-4567" required
-                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200 ease-in-out">
+            <div class="mb-5">
+                <label for="phoneNumber" class="block text-gray-700 text-sm font-medium mb-1.5">Phone Number</label>
+                <div class="flex space-x-2">
+                    <select id="countryCode" name="countryCode"
+                            class="px-3 py-2.5 border border-gray-300 rounded-md bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out">
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                    <input type="tel" id="localPhoneNumber" name="localPhoneNumber" placeholder="e.g., 1234567890" required
+                           class="flex-grow px-4 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out">
+                </div>
             </div>
         </div>
 
         <!-- Items Section -->
-        <div class="mb-8">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Your Order Selection</h2>
-            <p class="text-gray-500 text-sm mb-6">Select your preferred mangoes and quantities below. Totals will update automatically.</p>
+        <div class="mb-10">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-6">Your Order Selection</h2>
 
-            <!-- Banganepally Mangoes Card -->
-            <div class="bg-blue-50 p-6 rounded-lg border border-blue-200 mb-6 shadow-sm">
-                <h3 class="text-xl font-medium text-blue-800 mb-3 flex items-center">
-                    <span class="mr-2 text-2xl">🥭</span> Banganepally Mangoes
-                </h3>
-                <div class="mb-4">
-                    <label for="banganepallyBoxSize" class="block text-gray-700 text-sm font-medium mb-1">Box Size & Unit Price</label>
-                    <select id="banganepallyBoxSize" name="banganepallyBoxSize"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200 ease-in-out cursor-pointer item-input"
-                            data-item="banganepally">
-                        <option value="0" selected disabled>Select an option</option>
-                        <option value="2.99">1/2 box ($2.99)</option>
-                        <option value="4.00">1 box ($4.00)</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label for="banganepallyQty" class="block text-gray-700 text-sm font-medium mb-1">Quantity</label>
-                    <input type="number" id="banganepallyQty" name="banganepallyQty" value="0" min="0"
-                           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200 ease-in-out item-input"
-                           data-item="banganepally">
-                </div>
-                <p class="text-lg font-semibold text-gray-800">Banganepally Total: <span id="banganepallyTotalPrice">$0.00</span></p>
+            <!-- Table-like Header for Items on larger screens -->
+            <div class="hidden md:grid md:grid-cols-12 gap-x-6 px-6 py-3 text-sm font-semibold text-gray-600 border-b border-gray-200 mb-4 items-end">
+                <div class="md:col-span-3">Item Name</div>
+                <div class="md:col-span-3">Box Count</div>
+                <div class="md:col-span-3">Quantity</div>
+                <div class="md:col-span-3 text-right">Price</div>
             </div>
 
-            <!-- Rasalu Mangoes Card -->
-            <div class="bg-green-50 p-6 rounded-lg border border-green-200 shadow-sm">
-                <h3 class="text-xl font-medium text-green-800 mb-3 flex items-center">
-                    <span class="mr-2 text-2xl">🥭</span> Rasalu Mangoes
-                </h3>
-                <div class="mb-4">
-                    <label for="rasaluBoxSize" class="block text-gray-700 text-sm font-medium mb-1">Box Size & Unit Price</label>
-                    <select id="rasaluBoxSize" name="rasaluBoxSize"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:ring-2 focus:ring-green-400 focus:border-transparent transition duration-200 ease-in-out cursor-pointer item-input"
-                            data-item="rasalu">
-                        <option value="0" selected disabled>Select an option</option>
-                        <option value="1.99">1/2 box ($1.99)</option>
-                        <option value="3.00">1 box ($3.00)</option>
+            <!-- Apples Row -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-x-6 items-end bg-gray-50 px-6 py-5 rounded-lg border border-gray-200 mb-6 shadow-sm">
+                <div class="md:col-span-3">
+                    <h3 class="text-xl font-medium text-gray-800 flex items-center mb-1 md:mb-0">
+                        Apples
+                    </h3>
+                </div>
+                <div class="md:col-span-3">
+                    <label for="appleBoxSize" class="block md:hidden text-gray-700 text-xs font-medium mb-1">Box Count</label>
+                    <select id="appleBoxSize" name="appleBoxSize"
+                            class="w-full px-6 py-3 border border-gray-300 rounded-md bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out cursor-pointer item-input"
+                            data-item="apple">
+                        <option value="0" selected disabled>Select weight</option>
+                        <option value="3.50">1 kg ($3.50)</option>
+                        <option value="6.00">2 kg ($6.00)</option>
                     </select>
                 </div>
-                <div class="mb-4">
-                    <label for="rasaluQty" class="block text-gray-700 text-sm font-medium mb-1">Quantity</label>
-                    <input type="number" id="rasaluQty" name="rasaluQty" value="0" min="0"
-                           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-400 focus:border-transparent transition duration-200 ease-in-out item-input"
-                           data-item="rasalu">
+                <div class="md:col-span-3">
+                    <label for="appleQty" class="block md:hidden text-gray-700 text-xs font-medium mb-1">Quantity</label>
+                    <input type="number" id="appleQty" name="appleQty" value="0" min="0"
+                           class="w-full px-6 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out item-input"
+                           data-item="apple">
                 </div>
-                <p class="text-lg font-semibold text-gray-800">Rasalu Total: <span id="rasaluTotalPrice">$0.00</span></p>
+                <div class="md:col-span-3">
+                    <label class="block md:hidden text-gray-700 text-xs font-medium mb-1">Price</label>
+                    <p class="text-lg font-semibold text-gray-800 text-right md:text-right"><span id="appleTotalPrice">$0.00</span></p>
+                </div>
+            </div>
+
+            <!-- Bananas Row -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-x-6 items-end bg-gray-50 px-6 py-5 rounded-lg border border-gray-200 mb-6 shadow-sm">
+                <div class="md:col-span-3">
+                    <h3 class="text-xl font-medium text-gray-800 flex items-center mb-1 md:mb-0">
+                        Bananas
+                    </h3>
+                </div>
+                <div class="md:col-span-3">
+                    <label for="bananaBoxSize" class="block md:hidden text-gray-700 text-xs font-medium mb-1">Box Count</label>
+                    <select id="bananaBoxSize" name="bananaBoxSize"
+                            class="w-full px-6 py-3 border border-gray-300 rounded-md bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out cursor-pointer item-input"
+                            data-item="banana">
+                        <option value="0" selected disabled>Select count</option>
+                        <option value="2.00">1 dozen ($2.00)</option>
+                        <option value="3.50">2 dozen ($3.50)</option>
+                    </select>
+                </div>
+                <div class="md:col-span-3">
+                    <label for="bananaQty" class="block md:hidden text-gray-700 text-xs font-medium mb-1">Quantity</label>
+                    <input type="number" id="bananaQty" name="bananaQty" value="0" min="0"
+                           class="w-full px-6 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out item-input"
+                           data-item="banana">
+                </div>
+                <div class="md:col-span-3">
+                    <label class="block md:hidden text-gray-700 text-xs font-medium mb-1">Price</label>
+                    <p class="text-lg font-semibold text-gray-800 text-right md:text-right"><span id="bananaTotalPrice">$0.00</span></p>
+                </div>
+            </div>
+
+            <!-- Mangoes Row -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-x-6 items-end bg-gray-50 px-6 py-5 rounded-lg border border-gray-200 mb-6 shadow-sm">
+                <div class="md:col-span-3">
+                    <h3 class="text-xl font-medium text-gray-800 flex items-center mb-1 md:mb-0">
+                        Mangoes
+                    </h3>
+                </div>
+                <div class="md:col-span-3">
+                    <label for="mangoBoxSize" class="block md:hidden text-gray-700 text-xs font-medium mb-1">Box Count</label>
+                    <select id="mangoBoxSize" name="mangoBoxSize"
+                            class="w-full px-6 py-3 border border-gray-300 rounded-md bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out cursor-pointer item-input"
+                            data-item="mango">
+                        <option value="0" selected disabled>Select size</option>
+                        <option value="5.00">Small box ($5.00)</option>
+                        <option value="8.00">Large box ($8.00)</option>
+                    </select>
+                </div>
+                <div class="md:col-span-3">
+                    <label for="mangoQty" class="block md:hidden text-gray-700 text-xs font-medium mb-1">Quantity</label>
+                    <input type="number" id="mangoQty" name="mangoQty" value="0" min="0"
+                           class="w-full px-6 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out item-input"
+                           data-item="mango">
+                </div>
+                <div class="md:col-span-3">
+                    <label class="block md:hidden text-gray-700 text-xs font-medium mb-1">Price</label>
+                    <p class="text-lg font-semibold text-gray-800 text-right md:text-right"><span id="mangoTotalPrice">$0.00</span></p>
+                </div>
             </div>
         </div>
 
         <!-- Grand Total Section -->
-        <div class="mt-8 p-6 bg-yellow-100 rounded-lg border border-yellow-300 text-center shadow-md">
-            <h2 class="text-2xl font-bold text-yellow-800 mb-3 flex items-center justify-center">
-                <span class="mr-2 text-3xl">📝</span> Your Total:
-            </h2>
-            <p class="text-4xl font-extrabold text-yellow-900 leading-tight" id="grandTotalPrice">$0.00</p>
-            <p class="text-gray-600 text-sm mt-2 italic">This will update as you select items and quantities.</p>
+        <div class="mt-8 p-6 bg-gray-100 rounded-lg border border-gray-300 shadow-md flex items-center justify-end">
+            <h2 class="text-xl font-bold text-gray-800 mr-2">Grand Total:</h2>
+            <p class="text-3xl font-bold text-gray-900" id="grandTotalPrice">$0.00</p>
         </div>
 
         <!-- Submit Button & Loading Indicator -->
-        <div class="mt-8 text-center">
+        <div class="mt-10 text-center">
             <button type="submit" id="submitButton"
-                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-10 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
                 Submit Order ➡️
             </button>
-            <div id="loadingIndicator" class="hidden mt-4 text-blue-600 font-semibold">Submitting order...</div>
+            <div id="loadingIndicator" class="hidden mt-4 text-blue-600 font-semibold text-sm">Submitting order...</div>
         </div>
     </div>
 
     <!-- The Modal (for success/error messages) -->
-    <div id="statusModal" class="modal">
+    <div id="statusModal" class="modal hidden">
         <div class="modal-content">
             <span class="close-button">&times;</span>
-            <p id="modalMessage" class="text-lg font-medium text-gray-800"></p>
-            <button id="modalCloseBtn" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition duration-200 ease-in-out">Close</button>
+            <p id="modalMessage" class="text-lg font-medium text-gray-800 mb-4"></p>
+            <button id="modalCloseBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition duration-200 ease-in-out">Close</button>
         </div>
     </div>
 
@@ -183,15 +238,21 @@
         // Get references to all necessary elements
         const customerName = document.getElementById('customerName');
         const emailAddress = document.getElementById('emailAddress');
-        const phoneNumber = document.getElementById('phoneNumber');
+        const countryCodeSelect = document.getElementById('countryCode');
+        const localPhoneNumber = document.getElementById('localPhoneNumber');
 
-        const banganepallyBoxSize = document.getElementById('banganepallyBoxSize');
-        const banganepallyQty = document.getElementById('banganepallyQty');
-        const banganepallyTotalPriceDisplay = document.getElementById('banganepallyTotalPrice');
+        const appleBoxSize = document.getElementById('appleBoxSize');
+        const appleQty = document.getElementById('appleQty');
+        const appleTotalPriceDisplay = document.getElementById('appleTotalPrice');
 
-        const rasaluBoxSize = document.getElementById('rasaluBoxSize');
-        const rasaluQty = document.getElementById('rasaluQty');
-        const rasaluTotalPriceDisplay = document.getElementById('rasaluTotalPrice');
+        const bananaBoxSize = document.getElementById('bananaBoxSize');
+        const bananaQty = document.getElementById('bananaQty');
+        const bananaTotalPriceDisplay = document.getElementById('bananaTotalPrice');
+
+        const mangoBoxSize = document.getElementById('mangoBoxSize');
+        const mangoQty = document.getElementById('mangoQty');
+        const mangoTotalPriceDisplay = document.getElementById('mangoTotalPrice');
+
 
         const grandTotalPriceDisplay = document.getElementById('grandTotalPrice');
         const submitButton = document.getElementById('submitButton');
@@ -202,50 +263,94 @@
         const closeButton = document.querySelector('.close-button');
         const modalCloseBtn = document.getElementById('modalCloseBtn');
 
+        // Country codes data
+        const countryCodes = [
+            { code: '+1', name: 'USA (+1)' },
+            { code: '+91', name: 'India (+91)' },
+            { code: '+44', name: 'UK (+44)' },
+            { code: '+61', name: 'Australia (+61)' },
+            { code: '+81', name: 'Japan (+81)' },
+            { code: '+49', name: 'Germany (+49)' },
+            { code: '+33', name: 'France (+33)' },
+            { code: '+86', name: 'China (+86)' },
+            { code: '+7', name: 'Russia (+7)' },
+            { code: '+55', name: 'Brazil (+55)' },
+            { code: '+27', name: 'South Africa (+27)' },
+            { code: '+971', name: 'UAE (+971)' },
+            // Add more as needed
+        ];
+
+        // Function to populate country codes dropdown
+        function populateCountryCodes() {
+            countryCodes.forEach(country => {
+                const option = document.createElement('option');
+                option.value = country.code;
+                option.textContent = country.name;
+                countryCodeSelect.appendChild(option);
+            });
+            // Set a default selected country, e.g., India
+            countryCodeSelect.value = '+91';
+        }
+
+        // Function to validate phone number (basic example)
+        function validatePhoneNumber(code, number) {
+            const fullNumber = code + number;
+            // A very basic regex for demonstration. This checks for common international number patterns.
+            const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+            return phoneRegex.test(fullNumber);
+        }
 
         // Function to calculate and update totals
         function calculateTotals() {
-            let banganepallyUnitPrice = parseFloat(banganepallyBoxSize.value);
-            let banganepallyQuantity = parseInt(banganepallyQty.value);
-
-            // Handle disabled/placeholder option selected or invalid input
-            if (isNaN(banganepallyUnitPrice) || banganepallyUnitPrice === 0 || banganepallyUnitPrice < 0) {
-                banganepallyUnitPrice = 0;
+            // Apples calculation
+            let appleUnitPrice = parseFloat(appleBoxSize.value);
+            let appleQuantity = parseInt(appleQty.value);
+            if (isNaN(appleUnitPrice) || appleUnitPrice === 0 || appleUnitPrice < 0) {
+                appleUnitPrice = 0;
             }
-            if (isNaN(banganepallyQuantity) || banganepallyQuantity < 0) {
-                banganepallyQuantity = 0;
+            if (isNaN(appleQuantity) || appleQuantity < 0) {
+                appleQuantity = 0;
             }
+            const appleTotal = appleUnitPrice * appleQuantity;
+            appleTotalPriceDisplay.textContent = `$${appleTotal.toFixed(2)}`;
 
-            const banganepallyTotal = banganepallyUnitPrice * banganepallyQuantity;
-            banganepallyTotalPriceDisplay.textContent = `$${banganepallyTotal.toFixed(2)}`;
-
-            let rasaluUnitPrice = parseFloat(rasaluBoxSize.value);
-            let rasaluQuantity = parseInt(rasaluQty.value);
-
-            // Handle disabled/placeholder option selected or invalid input
-            if (isNaN(rasaluUnitPrice) || rasaluUnitPrice === 0 || rasaluUnitPrice < 0) {
-                rasaluUnitPrice = 0;
+            // Bananas calculation
+            let bananaUnitPrice = parseFloat(bananaBoxSize.value);
+            let bananaQuantity = parseInt(bananaQty.value);
+            if (isNaN(bananaUnitPrice) || bananaUnitPrice === 0 || bananaUnitPrice < 0) {
+                bananaUnitPrice = 0;
             }
-            if (isNaN(rasaluQuantity) || rasaluQuantity < 0) {
-                rasaluQuantity = 0;
+            if (isNaN(bananaQuantity) || bananaQuantity < 0) {
+                bananaQuantity = 0;
             }
+            const bananaTotal = bananaUnitPrice * bananaQuantity;
+            bananaTotalPriceDisplay.textContent = `$${bananaTotal.toFixed(2)}`;
 
-            const rasaluTotal = rasaluUnitPrice * rasaluQuantity;
-            rasaluTotalPriceDisplay.textContent = `$${rasaluTotal.toFixed(2)}`;
+            // Mangoes calculation
+            let mangoUnitPrice = parseFloat(mangoBoxSize.value);
+            let mangoQuantity = parseInt(mangoQty.value);
+            if (isNaN(mangoUnitPrice) || mangoUnitPrice === 0 || mangoUnitPrice < 0) {
+                mangoUnitPrice = 0;
+            }
+            if (isNaN(mangoQuantity) || mangoQuantity < 0) {
+                mangoQuantity = 0;
+            }
+            const mangoTotal = mangoUnitPrice * mangoQuantity;
+            mangoTotalPriceDisplay.textContent = `$${mangoTotal.toFixed(2)}`;
 
-            const grandTotal = banganepallyTotal + rasaluTotal;
+            const grandTotal = appleTotal + bananaTotal + mangoTotal;
             grandTotalPriceDisplay.textContent = `$${grandTotal.toFixed(2)}`;
         }
 
         // Function to show modal message
         function showModal(message) {
             modalMessage.textContent = message;
-            statusModal.style.display = 'flex'; // Use flex to center the modal
+            statusModal.classList.remove('hidden'); // Show modal
         }
 
         // Function to hide modal message
         function hideModal() {
-            statusModal.style.display = 'none';
+            statusModal.classList.add('hidden'); // Hide modal
         }
 
         // Event listeners for modal close buttons
@@ -258,21 +363,23 @@
             }
         });
 
-
         // Handle form submission
         submitButton.addEventListener('click', async (event) => {
             event.preventDefault(); // Prevent default form submission
 
-            // Simple validation
-            if (!customerName.value || !emailAddress.value || !phoneNumber.value) {
+            // Basic client-side validation
+            if (!customerName.value || !emailAddress.value || !localPhoneNumber.value) {
                 showModal("Please fill in all personal information fields.");
+                return;
+            }
+            if (!validatePhoneNumber(countryCodeSelect.value, localPhoneNumber.value)) {
+                showModal("Please enter a valid phone number.");
                 return;
             }
             if (parseFloat(grandTotalPriceDisplay.textContent.replace('$', '')) <= 0) {
                 showModal("Please select at least one item and quantity to order.");
                 return;
             }
-
 
             submitButton.disabled = true;
             loadingIndicator.classList.remove('hidden');
@@ -281,43 +388,46 @@
                 timestamp: new Date().toLocaleString(),
                 customerName: customerName.value,
                 emailAddress: emailAddress.value,
-                phoneNumber: phoneNumber.value,
-                banganepallyBoxSize: banganepallyBoxSize.options[banganepallyBoxSize.selectedIndex].text, // Get selected text
-                banganepallyQty: banganepallyQty.value,
-                banganepallyTotal: banganepallyTotalPriceDisplay.textContent,
-                rasaluBoxSize: rasaluBoxSize.options[rasaluBoxSize.selectedIndex].text, // Get selected text
-                rasaluQty: rasaluQty.value,
-                rasaluTotal: rasaluTotalPriceDisplay.textContent,
+                phoneNumber: countryCodeSelect.value + localPhoneNumber.value, // Combine code and number
+                appleBoxSize: appleBoxSize.options[appleBoxSize.selectedIndex].text,
+                appleQty: appleQty.value,
+                appleTotal: appleTotalPriceDisplay.textContent,
+                bananaBoxSize: bananaBoxSize.options[bananaBoxSize.selectedIndex].text,
+                bananaQty: bananaQty.value,
+                bananaTotal: bananaTotalPriceDisplay.textContent,
+                mangoBoxSize: mangoBoxSize.options[mangoBoxSize.selectedIndex].text,
+                mangoQty: mangoQty.value,
+                mangoTotal: mangoTotalPriceDisplay.textContent,
                 grandTotal: grandTotalPriceDisplay.textContent
             };
 
             try {
-                // Using fetch to send data to Google Apps Script
                 const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors', // Required for cross-origin submission to Apps Script
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    // Convert form data to URL-encoded string
                     body: new URLSearchParams(formData).toString()
                 });
 
-                // Since mode is 'no-cors', we can't directly read the response.
-                // Assume success if no network error.
-                showModal("Order submitted successfully! Thank you.");
-                // Optionally clear the form after successful submission
+                showModal("Order submitted successfully! Thank you for your order!");
+                
+                // Clear the form fields after successful submission
                 customerName.value = '';
                 emailAddress.value = '';
-                phoneNumber.value = '';
-                banganepallyBoxSize.value = '0';
-                banganepallyQty.value = '0';
-                rasaluBoxSize.value = '0';
-                rasaluQty.value = '0';
-                calculateTotals(); // Recalculate to reset totals
+                countryCodeSelect.value = '+91'; // Reset to default
+                localPhoneNumber.value = '';
+                appleBoxSize.value = '0';
+                appleQty.value = '0';
+                bananaBoxSize.value = '0';
+                bananaQty.value = '0';
+                mangoBoxSize.value = '0';
+                mangoQty.value = '0';
+                calculateTotals(); // Recalculate to reset totals display
             } catch (error) {
                 console.error('Error submitting form:', error);
-                showModal("There was an error submitting your order. Please try again.");
+                showModal("There was an error submitting your order. Please try again later.");
             } finally {
                 submitButton.disabled = false;
                 loadingIndicator.classList.add('hidden');
@@ -325,14 +435,20 @@
         });
 
         // Add event listeners for real-time updates
-        banganepallyBoxSize.addEventListener('change', calculateTotals);
-        banganepallyQty.addEventListener('input', calculateTotals); // 'input' for real-time as user types
+        appleBoxSize.addEventListener('change', calculateTotals);
+        appleQty.addEventListener('input', calculateTotals);
 
-        rasaluBoxSize.addEventListener('change', calculateTotals);
-        rasaluQty.addEventListener('input', calculateTotals); // 'input' for real-time as user types
+        bananaBoxSize.addEventListener('change', calculateTotals);
+        bananaQty.addEventListener('input', calculateTotals);
 
-        // Initial calculation on page load
-        document.addEventListener('DOMContentLoaded', calculateTotals);
+        mangoBoxSize.addEventListener('change', calculateTotals);
+        mangoQty.addEventListener('input', calculateTotals);
+
+        // Initial setup on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            populateCountryCodes(); // Populate dropdown on load
+            calculateTotals(); // Initial calculation
+        });
     </script>
 </body>
 </html>
